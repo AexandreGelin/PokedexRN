@@ -20,7 +20,7 @@ class Home extends React.Component{
         const storedName = getNameStored()
 
         storedName.then((result) => {
-            if(result !== null) {
+            if(result !== '') {
                 this.props.navigation.navigate('PokeDex')
             }
             else{
