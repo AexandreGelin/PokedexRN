@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {SafeAreaView, View, StyleSheet, Text, StatusBar,Image, ImageBackground, TouchableOpacity, TextInput} from 'react-native';
-
+import {storeName, getNameStored} from './NameStorage'
 
 
 class Home extends React.Component{
@@ -12,7 +12,8 @@ class Home extends React.Component{
     }
 
     sendName(){
-
+        storeName(this.state.username);
+        this.props.navigation.navigate('PokeDex');
     }
 
 
@@ -29,7 +30,7 @@ class Home extends React.Component{
                             height: 40,
                         }} defaultValue="Entrer votre Nom" returnKeyLabel = {"next"}
                         onChangeText={(text) => this.setState({username:text})}></TextInput>
-                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('PokeDex', {username: this.state.username})}>
+                        <TouchableOpacity style={styles.button} onPress={() => this.sendName(this)}>
                             <Text style={{color: '#ffcc03', fontWeight: 'bold'}}>OUVRIR LE POKEDEX</Text>
                         </TouchableOpacity>
                     </View>

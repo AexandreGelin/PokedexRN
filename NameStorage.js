@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const storeName = (value) =>{
+const storeName = async (value) =>{
     try {
         await AsyncStorage.setItem('@profile', value)
       } catch (e) {
@@ -8,7 +8,7 @@ const storeName = (value) =>{
       }
 }
 
-const getNameStored = () => {
+const getNameStored = async () => {
     try {
         const value = await AsyncStorage.getItem('@profile')
         if(value !== null) {
@@ -20,4 +20,4 @@ const getNameStored = () => {
 }
 
 
-export default {storeName, getNameStored}
+export {storeName, getNameStored}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, View, StyleSheet, Text, StatusBar, VirtualizedList, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import PokeCard from './PokeCard'
 import { useNavigation } from '@react-navigation/native';
+import {getNameStored} from './NameStorage'
 
 const PokemonList = ({route}) => {
   const [isLoading, setLoading] = useState(true);
@@ -52,8 +53,14 @@ const PokemonList = ({route}) => {
   }
 
   const setPokedexName = () => {
-    setUserName(route.params.username)
-  }
+    const storedUsername = getNameStored();
+    
+    storedUsername.then((pokedexName) => {
+      console.log(pokedexName)
+      setUserName(pokedexName)
+    })
+
+  } 
 
   useEffect(() => {
     getPokemonList();
