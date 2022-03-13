@@ -20,6 +20,9 @@
   npm start
 ```
 
+## Au démarrage:
+Retourner sur la 1ere page pour set le nom
+
 ## API utilisée :
 
 [Pokeapi](https://pokeapi.co/)
