@@ -133,7 +133,7 @@ class PokeCard extends React.Component {
   };
 
    goToDetails = () => {
-     this.props.navigation.navigate('Details')
+     this.props.navigation.navigate('Details', {pokemon: this.props.pokemon})
    }
 
   render() {

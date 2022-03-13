@@ -25,6 +25,8 @@ const PokemonList = ({route}) => {
             name: pokeDetail.species.name,
             sprite: pokeDetail.sprites.front_default,
             type1: pokeDetail.types[0].type.name,
+            type2: null,
+            url: pokeDetail.species.url,
           };
           pokeData.push(pokeObj);
           pokeData.sort((a,b) => { return parseInt(a.id)-parseInt(b.id)})
@@ -37,6 +39,7 @@ const PokemonList = ({route}) => {
             sprite: pokeDetail.sprites.front_default,
             type1: pokeDetail.types[0].type.name,
             type2: pokeDetail.types[1].type.name,
+            url: pokeDetail.species.url,
           };
           pokeData.push(pokeObj);
           pokeData.sort((a,b) => { return parseInt(a.id)-parseInt(b.id)})
