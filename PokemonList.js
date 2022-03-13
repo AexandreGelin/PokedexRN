@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, View, StyleSheet, Text, StatusBar, VirtualizedList, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import PokeCard from './PokeCard'
+import { useNavigation } from '@react-navigation/native';
 
-
-// const swapCaptureState = (pokemon) => {
-//   if(pokemon.isCaptured){
-//     pokemon.isCaptured = false
-//   }
-//   else {
-//     pokemon.isCaptured = true;
-//   }
-// }
 const PokemonList = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [username, setUserName] = useState("");
   let pokeData = [];
 
- 
+  const navigation = useNavigation(); 
+
   const getPokemonList = async () => {
     try {
       const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
@@ -63,6 +57,9 @@ const PokemonList = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>PokéDex</Text>
+      </View>
       
       {isLoading ? <ActivityIndicator/> : (
         <ImageBackground source={require('./assets/background.jpg')} style={styles.background}>
@@ -70,7 +67,7 @@ const PokemonList = () => {
             data={data}
             initialNumToRender={4}
             renderItem={({ item }) => (
-              <PokeCard pokemon={item} />
+              <PokeCard pokemon={item} navigation={navigation} />
             )} 
             keyExtractor={ item  => item.name}
             getItem={(data, index) => data[index]}
@@ -124,6 +121,13 @@ const styles = StyleSheet.create({
     right: 30,
     alignSelf: 'center'
   },
+  hearder: {
+    
+  },
+  headerText: {
+    fontSize: 20,
+    textAlign: 'center',
+  }
 });
 
 

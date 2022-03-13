@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View} from 'react-native';
 import PokemonList from './PokemonList'
+import { View, Text} from 'react-native';
 
 class PokemonDetails extends React.Component {
     render() {

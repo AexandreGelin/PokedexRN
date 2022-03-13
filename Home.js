@@ -4,6 +4,16 @@ import {SafeAreaView, View, StyleSheet, Text, StatusBar,Image, ImageBackground, 
 
 
 class Home extends React.Component{
+    constructor() {
+        super()
+        this.state = {
+            username : '',
+        }
+    }
+
+    sendName(){
+
+    }
 
 
     render() {
@@ -17,7 +27,8 @@ class Home extends React.Component{
                     <View style={styles.botomContainer}>
                         <TextInput style={{
                             height: 40,
-                        }} defaultValue="Entrer votre Nom"></TextInput>
+                        }} defaultValue="Entrer votre Nom" returnKeyLabel = {"next"}
+                        onChangeText={(text) => this.setState({username:text})}></TextInput>
                         <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('PokeDex')}>
                             <Text style={{color: '#ffcc03', fontWeight: 'bold'}}>OUVRIR LE POKEDEX</Text>
                         </TouchableOpacity>

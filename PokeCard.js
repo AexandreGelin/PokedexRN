@@ -150,13 +150,13 @@ class PokeCard extends React.Component {
     }
   };
 
-  // goToDetails = () => {
-    
-  // }
+   goToDetails = () => {
+     this.props.navigation.navigate('Details')
+   }
 
   render() {
     return (
-      <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Details')}>
+      <TouchableOpacity style={styles.item} onPress={() => this.goToDetails()}>
         <Image style={styles.sprite} source={{ uri: this.props.pokemon.sprite }} />
         <View style={styles.infos}>
           <Text style={styles.title}>{this.props.pokemon.name}</Text>
