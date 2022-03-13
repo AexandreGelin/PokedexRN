@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, StatusBar, Image, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { storeCaptureState , getCaptureState } from './storage/CaptureStorage';
 
 const switchCapture = (isCaptured) => {
   switch (isCaptured) {
@@ -94,14 +95,6 @@ const renderSwitch = (type) => {
   }
 }
 
-const storeData = async (pokemon, value) => {
-  try {
-    await AsyncStorage.setItem(`@pokemon_${pokemon.id}`, JSON.stringify(value))
-  } catch (e) {
-    console.log(e)
-  }
-}
-
 class PokeCard extends React.Component {
 
   constructor(props) {
@@ -112,40 +105,30 @@ class PokeCard extends React.Component {
   };
   
   componentDidMount(){
-    this.getData(this.props.pokemon)
+    this.setCapturedWithStorage();
   }
 
-  async getData(pokemon) {
-    try {
-      const value = await AsyncStorage.getItem(`@pokemon_${pokemon.id}`)
-      .then(() => {
-        if (value !== null) {
-          if(value == "true"){
-            this.setState({ captured: true })
-          }
-          else{
-            this.setState({ captured: false })
-          }
-        }
-        else {
-          this.setState({ captured: false })
-        }
-      })
-    } catch (e) {
-      console.log(e)
-    }
-  };
+  setCapturedWithStorage(){
+    const captureState = getCaptureState(this.props.pokemon);
+
+    captureState.then((result) => {
+      if(result !== null){
+        this.setState({captured : result})
+      }
+      else{
+        this.setState({captured : false})
+      }
+    })
+  }
 
   swapCaptureState = () => {
     if (this.state.captured) { 
       this.setState({ captured: false });
-      console.log(this.state.captured)
-      storeData(this.props.pokemon, this.state.captured);
+      storeCaptureState(this.props.pokemon, !this.state.captured);
     }
     else { 
       this.setState({ captured: true })
-      console.log(this.state.captured)
-      storeData(this.props.pokemon, this.state.captured); 
+      storeCaptureState(this.props.pokemon, !this.state.captured); 
     }
   };
 

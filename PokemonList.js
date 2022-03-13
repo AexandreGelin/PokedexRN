@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, View, StyleSheet, Text, StatusBar, VirtualizedList, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import PokeCard from './PokeCard'
 import { useNavigation } from '@react-navigation/native';
-import {getNameStored} from './NameStorage'
+import {getNameStored} from './storage/NameStorage'
 
 const PokemonList = ({route}) => {
   const [isLoading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const PokemonList = ({route}) => {
 
   const getPokemonList = async () => {
     try {
-      const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
+      const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=11');
       const json = await response.json()
       json.results.forEach(async (poke) => {
         const pokeJson = await fetch(poke.url);
