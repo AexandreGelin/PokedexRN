@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, StatusBar, Image, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PokemonDetails from './PokemonDetails';
 
 const switchCapture = (isCaptured) => {
   switch (isCaptured) {
@@ -149,9 +150,13 @@ class PokeCard extends React.Component {
     }
   };
 
+  // goToDetails = () => {
+    
+  // }
+
   render() {
     return (
-      <View style={styles.item}>
+      <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Details')}>
         <Image style={styles.sprite} source={{ uri: this.props.pokemon.sprite }} />
         <View style={styles.infos}>
           <Text style={styles.title}>{this.props.pokemon.name}</Text>
@@ -165,7 +170,7 @@ class PokeCard extends React.Component {
             {switchCapture(this.state.captured)}
           </TouchableOpacity>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
 

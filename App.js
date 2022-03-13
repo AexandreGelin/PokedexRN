@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PokemonList from './PokemonList'
 import Home from './Home'
+import PokemonDetails from './PokemonDetails'
 
 
 const Stack = createNativeStackNavigator();
@@ -14,6 +15,7 @@ function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
         <Stack.Screen name="PokeDex" component={PokemonList} options={{headerShown : false}}/>
+        <Stack.Screen name="Details" component={PokemonDetails} options={{headerShown : false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
