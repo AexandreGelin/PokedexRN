@@ -3,7 +3,7 @@ import { ActivityIndicator, SafeAreaView, View, StyleSheet, Text, StatusBar, Vir
 import PokeCard from './PokeCard'
 import { useNavigation } from '@react-navigation/native';
 
-const PokemonList = () => {
+const PokemonList = ({route}) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [username, setUserName] = useState("");
@@ -51,14 +51,19 @@ const PokemonList = () => {
     }
   }
 
+  const setPokedexName = () => {
+    setUserName(route.params.username)
+  }
+
   useEffect(() => {
     getPokemonList();
+    setPokedexName();
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>PokéDex</Text>
+        <Text style={styles.headerText}>PokéDex de {username}</Text>
       </View>
       
       {isLoading ? <ActivityIndicator/> : (

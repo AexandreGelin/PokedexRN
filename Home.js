@@ -29,7 +29,7 @@ class Home extends React.Component{
                             height: 40,
                         }} defaultValue="Entrer votre Nom" returnKeyLabel = {"next"}
                         onChangeText={(text) => this.setState({username:text})}></TextInput>
-                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('PokeDex')}>
+                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('PokeDex', {username: this.state.username})}>
                             <Text style={{color: '#ffcc03', fontWeight: 'bold'}}>OUVRIR LE POKEDEX</Text>
                         </TouchableOpacity>
                     </View>
