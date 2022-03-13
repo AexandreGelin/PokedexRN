@@ -82,6 +82,10 @@ const renderSwitch = (type) => {
     }
   }
 
+  const Capitalize= (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
 class PokemonDetails extends React.Component {
 
     constructor(props) {
@@ -151,20 +155,27 @@ class PokemonDetails extends React.Component {
                 <ImageBackground source={require('./assets/background.jpg')} style={styles.background}>
                     <View style={styles.header}>
                         <TouchableOpacity style={styles.backButton} onPress={() => this.goToList()}>
+                          <Image style={styles.backButton} source={require('./assets/fleche-gauche.png')}/>
                         </TouchableOpacity>
                     </View>
-                    <Image style={styles.sprite} source={{ uri: this.pokeData.sprite }} />
-                    <View><Text>{this.pokeData.name}</Text></View>
+                    <View style={styles.veiwDetail}>
+                      <Text style={styles.name}>
+                        {Capitalize(this.pokeData.name)}
+                      </Text>
+                      <View style={styles.imgPoke}>
+                        <Image style={styles.sprite} source={{ uri: this.pokeData.sprite }} />
+                      </View>
+                    </View>
                     <View style={styles.typerow}>
                         {renderSwitch(this.pokeData.type1)}
                         {renderSwitch(this.pokeData.type2)}
                     </View>
-                    <View>
-                        <Text>
+                    <View style={styles.veiwDetail}>
+                        <Text style={styles.description}>
                             {this.state.data.description}
                         </Text>
                     </View>
-                    <View>
+                    <View style={styles.veiwDetail}>
                         {this.specialIcons()}
                     </View>
                 </ImageBackground>
@@ -181,30 +192,55 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: StatusBar.currentHeight,
-
     },
     backButton: {
-        backgroundColor: "#D3D3D3",
-        justifyContent: 'flex-start',
-        marginVertical: 8,
-        marginHorizontal: 16,
-        padding: 20,
-        flexDirection: 'row',
+      justifyContent: 'flex-start',
+      flexDirection: 'row',
+      width: 30,
+      height: 30,
+      marginLeft: 2,
+      marginTop: 2,
       },
     background: {
-        flex: 1,
-        justifyContent: 'center',
+      flex: 1,
+      justifyContent: 'center',
     },
     sprite: {
-        width: 150,
-    height: 150,
+      justifyContent: 'center',
+      flexDirection:'row',
+      width: 275,
+      height: 275,
     },
     type: {
-        width: 50,
-        height: 50,
+      width: 50,
+      height: 50,
     },
     img: {
-        width: 20,
-        height: 20,
-    }
+      width: 20,
+      height: 20,
+    },
+    name: {   
+      marginTop:40,
+      fontSize: 20,
+      textAlign: 'center',
+      fontWeight: 'bold',
+      fontSize: 30,
+      color:'#ffffff'
+    },
+    description: {
+      textAlign: 'center',
+      fontSize: 30,
+      color:'#ffffff'
+    },
+    veiwDetail: {
+      flex: 0.5
+    },
+    typerow: {
+      flexDirection: 'row',
+      justifyContent:'center'
+    },
+    imgPoke: {
+      flexDirection: 'row',
+      justifyContent:'center'
+    },
   });
