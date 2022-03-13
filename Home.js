@@ -42,11 +42,11 @@ class Home extends React.Component{
                     <View style={styles.imgContainer}>
                         <Image style={styles.img} source={require('./assets/pokedex.png')}></Image>
                     </View>
-                    <View style={styles.botomContainer}>
-                        <TextInput style={{
-                            height: 40,
-                        }} defaultValue="Entrer votre Nom" returnKeyLabel = {"next"}
+                    <View style={styles.nameContainer}>
+                        <TextInput style={styles.inputName} placeholder="Entrer votre Nom" returnKeyLabel = {"next"}
                         onChangeText={(text) => this.setState({username:text})}></TextInput>
+                    </View>
+                    <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.button} onPress={() => this.sendName(this)}>
                             <Text style={{color: '#ffcc03', fontWeight: 'bold'}}>OUVRIR LE POKEDEX</Text>
                         </TouchableOpacity>
@@ -86,6 +86,24 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
     },
+    nameContainer: {
+        overflow: 'hidden',
+        borderWidth:3,
+        borderRadius: 5,
+        borderColor: "#ffcc03",
+        flex: 0.5,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        height:50,
+        color: '#ffffff',
+    },
+    buttonContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        height:50,
+        color: '#ffffff',
+    },
     button: {
         justifyContent: 'center',
         fontSize: 15,
@@ -93,5 +111,11 @@ const styles = StyleSheet.create({
         height: 60,
         padding: 10,
         borderRadius: 10,
+    },
+    inputName:{
+        height: 40, 
+        fontSize: 20,
+        color: "#ffffff",
+        justifyContent:'center',
     },
   });
