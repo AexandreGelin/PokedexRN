@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, StatusBar, Image, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import PokemonDetails from './PokemonDetails';
 
 const switchCapture = (isCaptured) => {
   switch (isCaptured) {
