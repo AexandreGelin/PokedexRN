@@ -16,6 +16,23 @@ class Home extends React.Component{
         this.props.navigation.navigate('PokeDex');
     }
 
+    alreadyConnected(){
+        const storedName = getNameStored()
+
+        storedName.then((result) => {
+            if(result !== null) {
+                this.props.navigation.navigate('PokeDex')
+            }
+            else{
+                this.props.navigation.navigate('Home')
+            }
+        })
+    }
+
+    componentDidMount(){
+        this.alreadyConnected()
+    }
+
 
     render() {
         return (

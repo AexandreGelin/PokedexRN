@@ -56,7 +56,6 @@ const PokemonList = ({route}) => {
     const storedUsername = getNameStored();
     
     storedUsername.then((pokedexName) => {
-      console.log(pokedexName)
       setUserName(pokedexName)
     })
 
