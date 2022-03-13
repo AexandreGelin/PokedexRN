@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {SafeAreaView, View, StyleSheet, Text, StatusBar,Image, ImageBackground, TouchableOpacity, TextInput} from 'react-native';
-import {storeName, getNameStored} from './NameStorage'
+import {storeName, getNameStored} from './storage/NameStorage'
 
 
 class Home extends React.Component{
