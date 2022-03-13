@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, ImageBackground, StatusBar, TouchableOpacity, Image} from 'react-native';
+import { ActivityIndicator ,StyleSheet, View, Text, ImageBackground, StatusBar, TouchableOpacity, Image} from 'react-native';
+
 
 
 const renderSwitch = (type) => {
@@ -83,6 +84,14 @@ const renderSwitch = (type) => {
 
 class PokemonDetails extends React.Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            data: {},
+            isLoading: true,
+        }
+    }
+
     pokeData = this.props.route.params.pokemon
     pokeDetail = []
 
@@ -91,7 +100,7 @@ class PokemonDetails extends React.Component {
     }
 
     componentDidMount(){
-        this.getPokemonData(this)
+        this.getPokemonData()
     }
 
     async getPokemonData() {
@@ -100,22 +109,45 @@ class PokemonDetails extends React.Component {
             const details = await response.json();
             if(details){
                 const pokeObj = {
-                    description : details.flavor_text_entries[0].flavor_text,
-                    isBaby : details.is_baby,
-                    isLegendary : details.is_legendary,
-                    isMythical : details.is_mythical,
+                    description: details.flavor_text_entries[0].flavor_text,
+                    isBaby: details.is_baby,
+                    isLeg: details.is_legendary,
+                    isMythic: details.is_mythical
                 }
                 this.pokeDetail.push(pokeObj);
+                this.setState( {data: this.pokeDetail[0]});
             }
         }
-        catch{
+        catch(e){
+            console.log(e)
+        }
+        finally{
+            this.setState({isLoading: false})
+        }
+    }
 
+    specialIcons() {
+        if(this.state.data.isBaby){
+            return (
+                <Image style={styles.img} source={require('./assets/baby.png')} />
+            )
+        }
+        else if(this.state.data.isLeg){
+            return (
+                <Image style={styles.img} source={require('./assets/legendary.png')} />
+            )
+        }
+        else if(this.state.data.isMythic){
+            return (
+                <Image style={styles.img} source={require('./assets/mythic.png')} />
+            )
         }
     }
 
     render() {
         return (
             <View style={styles.container}>
+                {this.state.isLoading ? <ActivityIndicator/> : 
                 <ImageBackground source={require('./assets/background.jpg')} style={styles.background}>
                     <View style={styles.header}>
                         <TouchableOpacity style={styles.backButton} onPress={() => this.goToList()}>
@@ -127,10 +159,18 @@ class PokemonDetails extends React.Component {
                         {renderSwitch(this.pokeData.type1)}
                         {renderSwitch(this.pokeData.type2)}
                     </View>
-                    <View><Text>Description : {this.pokeDetail.description}</Text></View>
-                    {console.log(this.pokeDetail)}
+                    <View>
+                        <Text>
+                            {this.state.data.description}
+                        </Text>
+                    </View>
+                    <View>
+                        {this.specialIcons()}
+                    </View>
                 </ImageBackground>
+                }
             </View>
+            
         )
     }
 }
@@ -162,5 +202,9 @@ const styles = StyleSheet.create({
     type: {
         width: 50,
         height: 50,
+    },
+    img: {
+        width: 20,
+        height: 20,
     }
   });
