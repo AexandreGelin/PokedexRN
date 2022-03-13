@@ -16,6 +16,10 @@ const switchCapture = (isCaptured) => {
   }
 }
 
+const Capitalize= (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 const renderSwitch = (type) => {
   switch (type) {
     case "grass":
@@ -141,7 +145,7 @@ class PokeCard extends React.Component {
       <TouchableOpacity style={styles.item} onPress={() => this.goToDetails()}>
         <Image style={styles.sprite} source={{ uri: this.props.pokemon.sprite }} />
         <View style={styles.infos}>
-          <Text style={styles.title}>{this.props.pokemon.name}</Text>
+          <Text style={styles.title}>{Capitalize(this.props.pokemon.name)}</Text>
           <View style={styles.typerow}>
             {renderSwitch(this.props.pokemon.type1)}
             {renderSwitch(this.props.pokemon.type2)}

@@ -14,7 +14,7 @@ const PokemonList = ({route}) => {
 
   const getPokemonList = async () => {
     try {
-      const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
+      const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=897');
       const json = await response.json()
       json.results.forEach(async (poke) => {
         const pokeJson = await fetch(poke.url);
